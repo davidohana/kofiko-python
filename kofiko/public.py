@@ -129,6 +129,8 @@ def configure(customization_name=None,
     Returns a list of lookup env-var key. Change if you wish to use a custom strategy.
     :param ini_key_mapper: Function with strategy to lookup overrides in ini files.
     Returns two lists of lookup sections and lookup options.
+
+    :return all options which were modified from their default value, in a dict of dict format.
     """
     config_parser = configparser.ConfigParser()
 
