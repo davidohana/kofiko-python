@@ -58,11 +58,11 @@ No external dependencies.
 ### How Kofiko works:
 
 * Configuration should be defined as classes with static attributes. 
-  Each class is considered as a configuration *section*, each class is a configuration 
-  *option*.
+  Each class is considered as a configuration **section**, each class is a configuration 
+  **option**.
 * Once `kofiko.configure()` is called, kofiko will override the default values defined
   for each attribute from values in the following order: (1) customization functions
-  (2) ini files (3) env. vars (the first override found takes place)
+  (2) `.INI` files (3) env. vars (the first override found takes place)
 * Kofiko will automatically derive the type of configuration options from their default values
 * Kofiko supports the following types: `string`, `int`, `float`, `bool`, `list`, `dict`.   
 * Lookup for configuration in env. vars is expecting the following format by default: 
