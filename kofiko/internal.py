@@ -1,7 +1,3 @@
-"""
-Registered config sections. Each section is represented by a Python Class where config options are represented by
-the static attributes of that class.
-"""
 import configparser
 import os
 import typing
@@ -21,6 +17,10 @@ class ConfigObject:
         self.name = name
 
 
+"""
+Registered config sections. Each section is represented by a Python Class where config options are represented by
+the static attributes of that class.
+"""
 config_sections: typing.List[ConfigObject] = []
 
 """
@@ -48,8 +48,6 @@ def get_first_ini_value(section_lookups: list, option_lookups: list, config_pars
 
 
 def convert_to_boolean(value):
-    """Return a boolean value translating from other types if necessary.
-    """
     if value.lower() not in configparser.ConfigParser.BOOLEAN_STATES:
         raise ValueError('Not a boolean: %s' % value)
     return configparser.ConfigParser.BOOLEAN_STATES[value.lower()]
@@ -166,6 +164,3 @@ def get_env_key_lookup_options(section: str, option: str):
             env_key_lookups.append(get_env_key(section_lookup, option_lookup))
 
     return env_key_lookups
-
-
-
