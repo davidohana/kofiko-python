@@ -61,9 +61,10 @@ No external dependencies.
   Each class is considered as a configuration **section**, each class is a configuration 
   **option**.
 * Once `kofiko.configure()` is called, kofiko will override the default values defined
-  for each attribute from values in the following order: (1) customization functions
-  (2) `.INI` files (3) env. vars (the first override found takes place)
-* Kofiko will automatically derive the type of configuration options from their default values
+  for each attribute from values in the following order: (1) registered customization functions
+  (2) provided `.INI` files (3) env. vars (the first override found takes place)
+* Kofiko will automatically derive the type of configuration options from their default values. 
+  This also works for lists and dicts.
 * Kofiko supports the following types: `string`, `int`, `float`, `bool`, `list`, `dict`.   
 * Lookup for configuration in env. vars is expecting the following format by default: 
   `prefix_section_option` (prefix can be omitted).
@@ -71,7 +72,7 @@ No external dependencies.
 * Configuration classes can reside everywhere in your code. They should be registered 
   using the `@config_section` decorator or explicitly with a call to `kofiko.register_section()`
 * If you use decorators, you should make sure that the modules that contains configuration
-  classes are loaded before the call to `kofiko.configure()`. You can do that by
+  classes and customization functions are loaded, before the call to `kofiko.configure()`. You can do that by
   performing `import` on those modules or calling `kofiko.register_module()`.
 
 ### to-do:
