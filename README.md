@@ -86,3 +86,7 @@ No external dependencies.
   
 ### License: 
 Apache-2.0
+
+### Contributing 
+
+Our project welcomes external contributions. Please refer to [CONTRIBUTING.md](CONTRIBUTING.md) for further details.
