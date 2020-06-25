@@ -73,8 +73,8 @@ No external dependencies.
   using the `@config_section` decorator or explicitly with a call to `kofiko.register_section()`
 * If you use decorators, you should make sure that the modules that contain configuration classes and customization functions are loaded, before the call to `kofiko.configure()`. 
   You can do that by performing `import` on those modules or calling `kofiko.register_module()`.
-* You can modify values in `kofiko.Settings` before `configure()` to control Kofiko's 
-  behavior, e.g. env. var lookup prefix; lookup case-sensitivity; whether dicts should be appended or replaced; separators for parsing lists and dicts and more.
+* You can modify values in `kofiko.Settings` before `configure()` to control Kofiko's behavior, 
+  e.g. env. var lookup prefix; lookup case-sensitivity; whether dicts should be appended or replaced; separators for parsing lists and dicts and more.
 * Specific terms like "Config", "Settings", can be omitted from the names of sections when overriding those in .ini or env. vars. For example: `DatabaseConfig.port` attribute 
   can be overridden from `database_port` env var.
 * `kofiko.configure()` returns a dict of all values modified by overrides. Might be useful to log this.
@@ -93,7 +93,6 @@ pip install kofiko
 
 ### to-do:
 
-* Packaging to pip
 * Command-Line arguments layer
 * Env-var interpolation
   
