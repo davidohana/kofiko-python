@@ -1,23 +1,23 @@
 import json
 
+import examples.config
 import kofiko
-from examples.config.database_config import DatabaseConfig
-from examples.config.general_config import GeneralConfig
 
 
-def print_class(cls, desc):
-    print("{} ({}):\n{}".format(cls.__name__, desc, json.dumps(kofiko.get_section_as_dict(cls), indent=2)))
+def print_obj(desc, obj):
+    print("{}:\n{}\n".format(desc, json.dumps(obj, indent=2)))
 
 
 def main():
-    print_class(DatabaseConfig, "default")
-    print_class(GeneralConfig, "default")
+    # all decorated sections and customizations inside this module will be registered
+    kofiko.register_module(examples.config, True)
 
-    # all decorated customizations inside this module will be registered
-    kofiko.configure(customization_name="prod", ini_file_names="../cfg/prod.ini")
+    print_obj("Default", kofiko.get_all_configuration(False))
 
-    print_class(DatabaseConfig, "configured")
-    print_class(GeneralConfig, "configured")
+    overrides = kofiko.configure(customization_name="prod", ini_file_names="../cfg/prod.ini")
+
+    print_obj("Overrides", overrides)
+    print_obj("Configured", kofiko.get_all_configuration(True))
 
 
 if __name__ == '__main__':

@@ -4,7 +4,7 @@ A configuration package with code-first approach for Python.
 Copyright (C) 2020 David Ohana @ ibm.com
 License: Apache-2.0
 """
-
+import copy
 import importlib
 import inspect
 import pkgutil
@@ -101,11 +101,38 @@ def get_section_as_dict(cls):
     return attr_dict
 
 
+def get_all_configuration(flat=False):
+    all_config = {}
+    for section in config_sections:
+        config_class = section.obj
+        options = get_section_as_dict(config_class)
+        if not flat:
+            all_config[section.name] = copy.deepcopy(options)
+            continue
+        for option_name, option_val in options.items():
+            all_config[section.name + "." + option_name] = option_val
+
+    return all_config
+
+
 def configure(customization_name=None,
               ini_file_names="",
               env_key_mapper=get_env_key_lookup_options,
               ini_key_mapper=get_ini_lookup_options):
+    """
+    Override default values of static attributes in registered configuration classes (sections).
+    Override Order: customization function -> ini file -> env. var (first match wins)
+
+    :param customization_name: All registered customization functions with the specified name will be executed (optional)
+    :param ini_file_names: A single .ini filename or a list of file-names (optional)
+    :param env_key_mapper: Function with strategy to lookup overrides in environment vars.
+    Returns a list of lookup env-var key. Change if you wish to use a custom strategy.
+    :param ini_key_mapper: Function with strategy to lookup overrides in ini files.
+    Returns two lists of lookup sections and lookup options.
+    """
     config_parser = configparser.ConfigParser()
+
+    default_config = get_all_configuration()
 
     for customization in config_customizations:
         if customization.name == customization_name:
@@ -114,20 +141,34 @@ def configure(customization_name=None,
     if ini_file_names:
         config_parser.read(ini_file_names)
 
-    for section in config_sections:
-        config_class = section.obj
-        section_name = section.name
+    for section_name in config_sections:
+        config_class = section_name.obj
+        section_name = section_name.name
         options = get_section_as_dict(config_class).keys()
 
         for option_name in options:
-            if Settings.env_override_enabled:
-                env_key_lookups = env_key_mapper(section_name, option_name)
-                env_val = get_first_env_value(env_key_lookups)
-                if env_val:
-                    set_attr_from_text(config_class, option_name, env_val)
-                    continue
 
-            section_lookups, option_lookups = ini_key_mapper(section_name, option_name)
-            ini_val = get_first_ini_value(section_lookups, option_lookups, config_parser)
-            if ini_val:
-                set_attr_from_text(config_class, option_name, ini_val)
+            def perform_override():
+                if Settings.env_override_enabled:
+                    env_key_lookups = env_key_mapper(section_name, option_name)
+                    env_val = get_first_env_value(env_key_lookups)
+                    if env_val:
+                        return set_attr_from_text(config_class, option_name, env_val)
+
+                if len(ini_file_names) > 0:
+                    section_lookups, option_lookups = ini_key_mapper(section_name, option_name)
+                    ini_val = get_first_ini_value(section_lookups, option_lookups, config_parser)
+                    if ini_val:
+                        return set_attr_from_text(config_class, option_name, ini_val)
+
+                return None
+
+            perform_override()
+
+    overrides = get_all_configuration()
+    for section_name, option_dict in default_config.items():
+        for option_name, option_val in option_dict.items():
+            if overrides[section_name][option_name] == default_config[section_name][option_name]:
+                del overrides[section_name][option_name]
+
+    return overrides

@@ -1,22 +1,24 @@
 import json
 
 import kofiko
-from examples.config.database_config import DatabaseConfig
-from examples.config.general_config import GeneralConfig
 
 
-def print_class(cls, desc):
-    print("{} ({}):\n{}".format(cls.__name__, desc, json.dumps(kofiko.get_section_as_dict(cls), indent=2)))
+def print_obj(desc, obj):
+    print("{}:\n{}\n".format(desc, json.dumps(obj, indent=2)))
 
 
+# noinspection PyUnresolvedReferences
 def main():
-    print_class(DatabaseConfig, "default")
-    print_class(GeneralConfig, "default")
+    # make sure config classes are loaded and registered before configure()
+    import examples.config.database_config
+    import examples.config.general_config
 
-    kofiko.configure(ini_file_names="../cfg/prod.ini")
+    print_obj("Default", kofiko.get_all_configuration(False))
 
-    print_class(DatabaseConfig, "configured")
-    print_class(GeneralConfig, "configured")
+    overrides = kofiko.configure(ini_file_names="../cfg/prod.ini")
+
+    print_obj("Overrides", overrides)
+    print_obj("Configured", kofiko.get_all_configuration(True))
 
 
 if __name__ == '__main__':

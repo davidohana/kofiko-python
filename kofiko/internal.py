@@ -118,6 +118,7 @@ def set_attr_from_text(cls, attr_name: str, str_value: str):
     typed_value = text_to_typed_value(str_value, attr_value)
     if typed_value is not None:
         setattr(cls, attr_name, typed_value)
+        return typed_value
 
 
 def get_env_key(section: str, option: str):
@@ -165,3 +166,6 @@ def get_env_key_lookup_options(section: str, option: str):
             env_key_lookups.append(get_env_key(section_lookup, option_lookup))
 
     return env_key_lookups
+
+
+
