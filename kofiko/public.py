@@ -102,6 +102,10 @@ def get_section_as_dict(cls):
 
 
 def get_all_configuration(flat=False):
+    """
+    returns a dictionary of all known configuration options and their values
+    :param flat: wheter to return 1-level dictionary in the format option.section=value, or 2-level dictionary.
+    """
     all_config = {}
     for section in config_sections:
         config_class = section.obj
@@ -130,7 +134,7 @@ def configure(customization_name=None,
     :param ini_key_mapper: Function with strategy to lookup overrides in ini files.
     Returns two lists of lookup sections and lookup options.
 
-    :return all options which were modified from their default value, in a dict of dict format.
+    :returns all options which were modified from their default value, in a dict of dict format.
     """
     config_parser = configparser.ConfigParser()
 
