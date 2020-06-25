@@ -37,7 +37,7 @@ Override default values from either (or both):
     ```
 
 1. Environment variables:  
-   ```
+   ```bash
    myapp_GENERAL_ENV=prod 
    myapp_general_bool_to_str=True:si
    ```
