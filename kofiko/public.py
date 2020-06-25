@@ -176,5 +176,7 @@ def configure(customization_name=None,
         for option_name, option_val in option_dict.items():
             if overrides[section_name][option_name] == default_config[section_name][option_name]:
                 del overrides[section_name][option_name]
+        if len(overrides[section_name]) == 0:
+            del overrides[section_name]
 
     return overrides
