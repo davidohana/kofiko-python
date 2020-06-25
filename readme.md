@@ -77,6 +77,7 @@ No external dependencies.
   behavior, e.g. env. var lookup prefix; lookup case-sensitivity; whether dicts should be appended or replaced; separators for parsing lists and dicts and more.
 * Specific terms like "Config", "Settings", can be omitted from the names of sections when overriding those in .ini or env. vars. For example: `DatabaseConfig.port` attribute 
   can be overridden from `database_port` env var.
+* `kofiko.configure()` returns a dict of all values modified by overrides. Might be useful to log this.
 
 ### to-do:
 
