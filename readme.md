@@ -49,7 +49,7 @@ kofiko.configure()
 
 And use configuration classes directly from your code.
 ```python
-print(GeneralConfig.enc) # prod
+print(GeneralConfig.env) # prod
 print(GeneralConfig.bool_to_str) # {True: 'Si', False: 'No'}
 ```
 
