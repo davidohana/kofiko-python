@@ -14,7 +14,6 @@ def main():
     print_class(GeneralConfig, "default")
 
     # all decorated customizations inside this module will be registered
-    import examples.config.customizations
     kofiko.configure(customization_name="prod", ini_file_names="../cfg/prod.ini")
 
     print_class(DatabaseConfig, "configured")

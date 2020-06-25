@@ -11,7 +11,7 @@ Define application configuration as Python classes:
 ```python
 @config_section
 class GeneralConfig:
-    env = "dev"
+    env = "default"
     port = 8001
     weights = [1.1, 2.2]
     bool_to_str = {
@@ -49,8 +49,8 @@ kofiko.configure()
 
 And use configuration classes directly from your code.
 ```python
-print(GeneralConfig.bool_to_str) # 
-print(GeneralConfig.bool_to_str) # 
+print(GeneralConfig.enc) # prod
+print(GeneralConfig.bool_to_str) # {True: 'Si', False: 'No'}
 ```
 
 No external dependencies. 
