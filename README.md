@@ -79,6 +79,18 @@ No external dependencies.
   can be overridden from `database_port` env var.
 * `kofiko.configure()` returns a dict of all values modified by overrides. Might be useful to log this.
 
+### Requirements
+
+Kofiko has no 3rd party requirements other than Python 3.6 or later.
+
+### Getting Started
+
+Kofiko is available via [PyPi](https://pypi.org/project/kofiko) and can be installed using:
+
+```
+pip install kofiko
+```
+
 ### to-do:
 
 * Packaging to pip
