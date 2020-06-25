@@ -6,7 +6,7 @@ import configparser
 import os
 import typing
 
-from kofiko.kofiko_settings import Settings
+from kofiko.settings import Settings
 
 
 class ConfigObject:

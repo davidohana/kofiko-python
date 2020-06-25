@@ -8,7 +8,7 @@ import importlib
 import inspect
 import pkgutil
 
-from kofiko.kofiko_internals import *
+from kofiko.internal import *
 
 
 def config_section(section_name: str = ""):

@@ -42,15 +42,15 @@ Override default values from either (or both):
    myapp_general_bool_to_str=True:si
    ```
 
-Call to configure:
+Call `configure()` to activate:
 ```python
 kofiko.configure()
 ```
 
-And use configuration classes directly from your code.
+And use static members of configured classes directly from your code.
 ```python
 print(GeneralConfig.env)            # prod
-print(GeneralConfig.bool_to_str)    # {True: 'Si', False: 'No'}
+print(GeneralConfig.bool_to_str)    # {True: 'Si', False: 'Nyet'}
 ```
 
 No external dependencies. 
