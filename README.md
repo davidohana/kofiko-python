@@ -4,6 +4,8 @@
 
 *kofiko* = (Ko)de-(Fi)rst (Ko)nfiguration
 
+See my blog [post](https://medium.com/@davidoha/code-first-configuration-approach-for-python-f975469433b9) about it.
+
 ![](docs/kofiko-python.png)
 
 Define application configuration as Python classes:
