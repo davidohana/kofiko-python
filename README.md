@@ -20,7 +20,7 @@ class GeneralConfig:
     }
 ```
 
-Override default values from either (or both):
+Override default values using one or more of the following:
 1. Customization functions
    ```python
     @config_custom
