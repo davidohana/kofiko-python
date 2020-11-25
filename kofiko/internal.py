@@ -68,7 +68,7 @@ def convert_to_dict(value: str, orig_dict: dict):
     list_of_tuples = []
     for key_val in list_of_key_val:
         if len(key_val) == 1:
-            raise ValueError("Invalid key/value pair: " + str(key_val))
+            raise ValueError(f"Invalid key/value pair '${key_val}' in dict representation '{value}'")
         list_of_tuples.append((key_val[0], key_val[1]))
 
     if len(orig_dict) == 0:
