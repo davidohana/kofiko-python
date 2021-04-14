@@ -64,12 +64,12 @@ def convert_to_list(value: str, orig_list: list):
 
 def convert_to_dict(value: str, orig_dict: dict):
     pairs = value.split(Settings.list_separator)
-    list_of_key_val = [p.split(Settings.key_val_separator, maxsplit=2) for p in pairs]
+    list_of_key_sep_val = [p.partition(Settings.key_val_separator) for p in pairs]
     list_of_tuples = []
-    for key_val in list_of_key_val:
-        if len(key_val) == 1:
-            raise ValueError(f"Invalid key/value pair '${key_val}' in dict representation '{value}'")
-        list_of_tuples.append((key_val[0], key_val[1]))
+    for ksv_tuple in list_of_key_sep_val:
+        if len(ksv_tuple) == 1:
+            raise ValueError(f"Invalid key/value pair '${ksv_tuple}' in dict representation '{value}'")
+        list_of_tuples.append((ksv_tuple[0], ksv_tuple[2]))
 
     if len(orig_dict) == 0:
         return dict(list_of_tuples)
