@@ -8,7 +8,7 @@ with open("README.md", "r") as fh:
 setup(
     name='kofiko',
     packages=['kofiko'],
-    version="1.0.5",
+    version="1.0.6",
     license='Apache',
     description="Code-First Configuration package for Python",
     long_description=long_description,
