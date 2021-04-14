@@ -67,8 +67,6 @@ def convert_to_dict(value: str, orig_dict: dict):
     list_of_key_sep_val = [p.partition(Settings.key_val_separator) for p in pairs]
     list_of_tuples = []
     for ksv_tuple in list_of_key_sep_val:
-        if len(ksv_tuple) == 1:
-            raise ValueError(f"Invalid key/value pair '${ksv_tuple}' in dict representation '{value}'")
         list_of_tuples.append((ksv_tuple[0], ksv_tuple[2]))
 
     if len(orig_dict) == 0:
